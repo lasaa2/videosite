@@ -2,21 +2,19 @@
   <div id="app">
     <HelloWorld/>
     <Videoplayer/>
-    <Chat/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
 import Videoplayer from './components/Videoplayer'
-import Chat from './components/Chat'
+// import Chat from './components/Chat'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Videoplayer,
-    Chat
+    Videoplayer
   }
 }
 </script>

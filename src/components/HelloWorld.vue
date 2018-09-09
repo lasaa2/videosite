@@ -12,7 +12,7 @@ export default {
   data () {
     return {
       msg: 'OUBS LIVE',
-      subTitle: 'This is onLINE'
+      subTitle: 'This is onDemand'
     }
   }
 }
