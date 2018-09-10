@@ -6,7 +6,6 @@ import Vue from 'vue' // tuodaan käytettäväksi vue kirjastoa
 import VueVideoPlayer from 'vue-video-player' // tuodaan vue-video-player kirjasto
 import 'vue-video-player/src/custom-theme.css' // tuodaan vue-video-player tyylitiedosto
 import 'video.js/dist/video-js.css' // tuodaan videojs tyylitiedosto
-// import 'videojs-contrib-hls/dist/videojs-contrib-hls'
 
 Vue.config.productionTip = false
 Vue.use(VueVideoPlayer) // use global vuevideoplayer plugin
@@ -22,8 +21,9 @@ new Vue({
 */
 
 /* jos jsonin hakee tiedostosta value arvo filtterissä on yksi objekti eikä monta objektia, miksi? */
-
 // import json from './data.json';
+
+/* Videoplayer component */
 
 Vue.component('videoplayer-component', {
   props: ['videos'],
@@ -48,14 +48,18 @@ Vue.component('videoplayer-component', {
     }
   },
   template: `<div>
-    <playlist-component @clicked="playerSetSrc" v-bind:videos="videos"/>
-    <video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions">
-    </video-player>
-    <button v-on:click="playerSetSrc()">apply</button>
-    <input v-model="url"/>
+      <playlist-component @clicked="playerSetSrc" v-bind:videos="videos"/>
+      <video-player 
+      class="vjs-custom-skin" 
+      ref="videoPlayer" 
+      :options="playerOptions">
+      </video-player>
   </div>
   `
 });
+
+
+/* Playlist component */
 
 Vue.component('playlist-component', {
   props: ['videos'],
@@ -64,11 +68,14 @@ Vue.component('playlist-component', {
       this.$emit('clicked', value);
     }
   },
-  template: '<div><h2>Playlist</h2><item-component @clicked="onClickChild" v-for="item in videos" v-bind:play="item"/></div>'
+  template: '<div><h2>Playlist</h2><item-component @clicked="onClickChild" v-for="item in videos" v-bind:item="item" v-bind:key="item.id"/></div>'
 });
 
+
+/* Playlist ITEM component */
+
 Vue.component('item-component', {
-  props: ['play'],
+  props: ['item'],
   filters: {
     fullName(value) {
       // console.log(value);
@@ -88,10 +95,12 @@ Vue.component('item-component', {
   template: 
   `
     <div>
-      <button v-on:click="onClickButton(play)" v-bind:src="play | url" v-bind:key="play.id">{{play | fullName}}</button>
+      <button v-on:click="onClickButton(item)" v-bind:src="item | url">{{item | fullName}}</button>
     </div>
     `
 });
+
+/* App */
 
 const app = new Vue({
 
