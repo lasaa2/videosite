@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="title">
     <h1>{{ msg }}</h1>
     <h2> {{ subTitle }}</h2>
   
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Title',
   data () {
     return {
       msg: 'OUBS LIVE',
@@ -20,6 +20,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.title {
+    background: #d1d1d1;
+    border: 1px solid;
+}
+
+
 h1, h2 {
   font-weight: normal;
 }

@@ -1,18 +1,18 @@
 <template>
-    <div class="chat">
-    <span>Chat window</span>
+    <div class="footer">
+    <span>Footer</span>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Chat'
+    name: 'Footer'
 }
 </script>
 
 <style scoped>
 
-.chat {
+.footer {
     background: #d1d1d1;
     border: 1px solid;
 }

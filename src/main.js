@@ -14,5 +14,5 @@ Vue.use(VueVideoPlayer) // use global vuevideoplayer plugin
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 })

@@ -2,8 +2,7 @@
 
 Short description
 
-- HTML5 Videoplayer 
-    - multicast support
+- HTML5 Videoplayer
     - livestream
     - on demand videos
 - Anonym chat plugin
@@ -28,12 +27,19 @@ https://videojs.com/getting-started/
 layout links
 http://www.webdesign-flash.ro/p/uvp/index.html#/?playlistId=0&videoId=8
 
+OUBS live url:
+https://wowza.oubs.fi/live/ngrp:oubs_all/playlist.m3u8
+
+For test playlist url:
+http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8
 
 
-Conding steps
+
+Dev steps
 
 1. Make first hello world template for beginning
 2. Videoplayer with demo video. Tech: video.js
+3. Make basic json output and placeholders componet for player, videolists, chat, titles and footer
 
 
 Made:
