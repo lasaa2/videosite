@@ -3,16 +3,21 @@
     <span>Playlist window</span>
         <ol>
             <li 
-            v-for="item in data"
+            v-for="item in data.videos"
             v-bind:key="item.id"
-            >{{item}}</li>
+            >
+            <a 
+            v-bind:href="item.url">
+            {{item.name}}
+            </a>
+            </li>
         </ol>
     </div>
 </template>
 
 <script>
 
-import json from '../data.json'
+import json from '../data.json';
 
 export default {
     name: 'Playlist',

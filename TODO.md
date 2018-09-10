@@ -41,6 +41,10 @@ Dev steps
 2. Videoplayer with demo video. Tech: video.js
 3. Make basic json output and placeholders componet for player, videolists, chat, titles and footer
 
+4. Change video from playlist links. Plus LIVE button to change to live
+
+5. Search from playlist videos
+
 
 Made:
 - use vuevideojs component (npm install vue-video-player)
@@ -49,3 +53,13 @@ Made:
 Videoplayer component
 - res for show and handle videoj
 
+
+
+
+App component
+    |
+    |
+videoplayer-component
+    |
+    |
+    playlist-component <---> item-component

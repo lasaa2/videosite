@@ -19,12 +19,17 @@ export default {
                 muted: true,
                 sources: [{
                     type: "video/mp4",
-                    src: "http://vjs.zencdn.net/v/oceans.mp4"
+                    src: {source}
                 }],
                 poster: "https://oubs.fi/wp-content/uploads/2016/11/cropped-oubs_white_teksti_lapi_152px.png"
             }
         }
     }
+}
+
+methods: {
+    changeVideo: () => { }
+    
 }
 
 </script>
