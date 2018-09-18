@@ -1,44 +1,85 @@
 <template>
-    <div class="videoplayer">
-        <video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions">
-        </video-player>
-    </div>
+    <video playsinline id="myPlayer" class="video-js vjs-default-skin" width="100%" controls preload="auto" data-setup='{ "aspectRatio":"16:9" }'></video>
 </template>
 
 <script>
+    window.videojs = require('video.js');
 
-export default {
-    name: 'Videoplayer',
+    export default {
+        name: 'Videolassi',
+        data(){
+            return{
+                player: '',
+                url: 'https://someurl.com',
+                volume: 1
+            };
+        },
+        methods: {
+            playerInitialize(){ 
+                this.player = videojs('myPlayer'); 
+            },
+            playerDispose(){ 
+                this.player.dispose(); 
+            },
 
-    data () {
-        return {
-            url: '',
-            playerOptions: { 
-                autoplay: false,
-                controls: true,
-                muted: true,
-                sources: [{
-                    type: "video/mp4",
-                    src: {source}
-                }],
-                poster: "https://oubs.fi/wp-content/uploads/2016/11/cropped-oubs_white_teksti_lapi_152px.png"
-            }
+            playerPlay(){
+                this.player.play();
+            },
+            playerPause(){
+                this.player.pause();
+            },
+
+
+            playerSetSrc(url){ 
+                this.player.src(url); 
+            },
+            playerSetVolume(float){
+                this.player.volume(float); 
+            },
+            playerSetPoster(url){ 
+                this.player.poster(url); 
+            },
+            playerSetTime(time){
+                this.player.currentTime(time);
+            },
+
+
+            playerEventEnded(){
+                console.log('ended');
+            },
+            playerEventVolume(){ 
+                this.volume = this.player.volume(); 
+            },
+            playerEventError(){ 
+                console.log( this.playerGetError() )
+            },
+
+
+            playerGetPaused(){
+                return this.player.paused();
+            },
+            playerGetTime(){
+                return this.player.currentTime();
+            },
+            playerGetError(){
+                return this.player.error().message;
+            },
+            
+            
+            playerSetupEvents(){
+                this.player.on('ended', function(){ var a = window.playerEvents.playerEventEnded(); });
+                this.player.on('volumechange', function(){ window.playerEvents.playerEventVolume(); });
+                this.player.on('error', function(){ window.playerEvents.playerEventError(); });
+            },
+        },
+        mounted(){
+            window.playerEvents = this;
+            this.playerInitialize();
+            this.playerSetSrc(this.url);
+            this.playerSetupEvents();
+        },
+        beforeDestroy() { 
+            this.playerDispose(); 
         }
     }
-}
-
-methods: {
-    changeVideo: () => { }
-    
-}
-
 </script>
-
-<style scoped>
-
-.videoplayer {
-    background: #d1d1d1;
-    border: 1px solid;
-}
-
-</style>

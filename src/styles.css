@@ -1,0 +1,57 @@
+/* Grid settings */
+
+.app {
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
+  
+  .title {
+    padding: 0 10px 0 10px;
+  }
+  
+  .videowindow { 
+    display:grid;
+  }
+
+  .videoplayer {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  
+  .playlist {
+    text-align: center;
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+  }
+
+  .button {
+    width: 70%;
+    font-size: 15px;
+    margin: 10px;
+  }
+  
+  .sidebar {
+    grid-column-start: 15;
+    grid-column-end: 16;
+    display: grid;
+  }
+
+  .chat {
+    text-align: center;
+    margin-left: 5px;
+    border-top: 1px solid;
+  }
+
+  .footer {
+    text-align: center;
+  }
+  
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 20px;
+  }
