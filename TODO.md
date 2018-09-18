@@ -34,14 +34,13 @@ For test playlist url:
 http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8
 
 
-
 Dev steps
 
-1. Make first hello world template for beginning
-2. Videoplayer with demo video. Tech: video.js
-3. Make basic json output and placeholders componet for player, videolists, chat, titles and footer
+~~1. Make first hello world template for beginning~~
+~~2. Videoplayer with demo video. Tech: video.js~~
+~~3. Make basic json output and placeholders componet for player, videolists, chat, titles and footer~~
 
-4. Change video from playlist links. Plus LIVE button to change to live
+~~4. Change video from playlist links. Plus LIVE button to change to live~~
 
 5. Search from playlist videos
 
