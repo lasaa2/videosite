@@ -4,6 +4,8 @@ import Vue from 'vue' // tuodaan käytettäväksi vue kirjastoa
 
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css' // tuodaan videojs tyylitiedosto
+import './assets/pure-min.css'
+import './assets/grids-responsive-min.css'
 import './styles.css'
 
 window.videojs = require('video.js');
@@ -19,11 +21,9 @@ Vue.component('videoplayer-component', {
     return {
       player: '',
       playerOptions: {
-        autoplay: false,
+        autoplay: true,
         controls: true,
         muted: true,
-        height: 360,
-        width: 640,
         poster: "https://oubs.fi/wp-content/uploads/2016/11/cropped-oubs_white_teksti_lapi_152px.png"
       }
     }
@@ -46,20 +46,19 @@ Vue.component('videoplayer-component', {
   },
 
   template: `
-  <div class="videowindow">  
-      <video
-      playsinline  
-          id="player"
-            class="video-js videoplayer">
-          <p class="vjs-no-js">
-            To view this video please enable JavaScript, and consider upgrading to a
-            web browser that
-            <a href="http://videojs.com/html5-video-support/" target="_blank">
-              supports HTML5 video
-            </a>
-          </p>
-      </video>
-      <playlist-component class="playlist" @clicked="playerSetUrl" v-bind:videos="videos"/>
+  <div class="pure-g">  
+        <video  
+            id="player"
+              class="video-js pure-u-2-3 videoplayer">
+            <p class="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a
+              web browser that
+              <a href="http://videojs.com/html5-video-support/" target="_blank">
+                supports HTML5 video
+              </a>
+            </p>
+        </video>
+      <playlist-component class="pure-u-1-3 playlist" @clicked="playerSetUrl" v-bind:videos="videos"/>
     </div>`
 
 });
@@ -101,7 +100,7 @@ Vue.component('item-component', {
   template: 
   `
     <div>
-      <button class="button" v-on:click="onClickButton(item)" v-bind:src="item | url">{{item | fullName}}</button>
+      <button class="playlist-buttons pure-button pure-button-primary" v-on:click="onClickButton(item)" v-bind:src="item | url">{{item | fullName}}</button>
     </div>
     `
 });

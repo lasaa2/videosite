@@ -10,6 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "i": "^0.3.6",
+    "pure": "^2.85.0",
+    "pure-vue": "0.0.0",
     "video.js": "^7.1.0",
     "videojs-contrib-hls": "^5.14.1",
     "videojs-contrib-hls.js": "^3.2.0",
