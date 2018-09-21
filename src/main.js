@@ -16,8 +16,8 @@ window.videojs = require('video.js');
 /* Videoplayer component */
 
 Vue.component('videoplayer-component', {
-  props: ['videos'],
-  data: function() {
+  props: ['videos', 'newUrl'],
+  data() {
     return {
       player: '',
       playerOptions: {
@@ -29,27 +29,31 @@ Vue.component('videoplayer-component', {
     }
   },
 
+  watch: {
+    // whenever question changes, this function will run
+    newUrl: function (newUrl, oldUrl) {
+      this.player.src(newUrl);
+    }
+  },
+
+
   methods: {
     playerInit() {
       this.player = videojs('player', this.playerOptions);
-    },
-
-    playerSetUrl(url) {
-      this.player.src(url);
     }
 
   },
 
   mounted() {
     this.playerInit();
-    this.playerSetUrl(this.videos[0].url);
+    this.player.src(this.videos[0].url);
   },
 
   template: `
-  <div class="pure-g">  
+  <div>  
         <video  
             id="player"
-              class="video-js pure-u-2-3 videoplayer">
+              class="video-js videoplayer">
             <p class="vjs-no-js">
               To view this video please enable JavaScript, and consider upgrading to a
               web browser that
@@ -58,24 +62,46 @@ Vue.component('videoplayer-component', {
               </a>
             </p>
         </video>
-      <playlist-component class="pure-u-1-3 playlist" @clicked="playerSetUrl" v-bind:videos="videos"/>
     </div>`
-
 });
 
 /* Playlist component */
 
 Vue.component('playlist-component', {
   props: ['videos'],
-  methods: {
-    onClickChild: function(value) {
-      this.$emit('clicked', value);
+
+  data() {
+    return {
+      search: '',
     }
   },
 
-  template: '<div><h2>Playlist</h2><item-component @clicked="onClickChild" v-for="item in videos" v-bind:item="item" v-bind:key="item.id"/></div>'
-});
+  methods: {
+    onClickChild: function(value) {
+      this.$emit('clicked', value);
+    },
 
+    testFunk() {
+      console.log(this.searchStr);
+    }
+
+  },
+
+  computed: {
+    filteredList() {
+      return this.videos.filter(video => {
+        return video.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  },
+
+  template: `
+  <div>
+    <h2>Playlist</h2>
+    <search-playlist-component v-model="search"/>
+    <item-component v-on:clicked="onClickChild" v-for="item in filteredList" :item="item" :key="item.id"/>
+  </div>`
+});
 
 /* Playlist ITEM component */
 
@@ -100,9 +126,22 @@ Vue.component('item-component', {
   template: 
   `
     <div>
-      <button class="playlist-buttons pure-button pure-button-primary" v-on:click="onClickButton(item)" v-bind:src="item | url">{{item | fullName}}</button>
+      <button class="playlist-buttons pure-button pure-button-primary" v-on:click="onClickButton(item)" :src="item | url">
+      {{item | fullName}}
+      </button>
     </div>
     `
+});
+
+/* Search component */
+
+Vue.component('search-playlist-component', {
+  props: ['value'],
+  template: `
+  <div>
+    <input class="searchbox" v-bind:value="value" v-on:input="$emit('input', $event.target.value)" placeholder="Search title..."/>
+  </div>
+  `
 });
 
 /* Chat */
@@ -166,29 +205,35 @@ const app = new Vue({
 
   el: '#app',
   data: {
-    videos: [
-      { 
-        "id":"0", "name": "LIVE", "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
-      },
-      { 
-        "id":"1", "name": "Sample 1", "url": "http://vjs.zencdn.net/v/oceans.mp4"
-      },
-      { 
-        "id":"2", "name": "Sample 2", "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
-      }
-    ]
+      newUrl: '',
+      videos: [
+        { 
+          "id":"0", "name": "LIVE", "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
+        },
+        { 
+          "id":"1", "name": "Sample 1", "url": "http://vjs.zencdn.net/v/oceans.mp4"
+        },
+        { 
+          "id":"2", "name": "Sample 2", "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
+        }
+      ]
   },
+
+  methods: {
+
+    setPlaylistUrl(arr) {
+        this.newUrl = arr;
+    }
+
+  },
+
   template: `
   <div class="app">
-    <div class="header">
       <title-component/>
-    </div>
-    <div class="main">
-      <videoplayer-component v-bind:videos="videos"/>
-    </div>
-    <div class="chat">
-      <chat-component/>
-    </div>
+      <div class="main">
+        <videoplayer-component class="" v-bind:newUrl="newUrl" :videos="videos"/>
+        <playlist-component class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
+      </div>
   </div>
   `
 })

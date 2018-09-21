@@ -35,8 +35,7 @@ http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8
 
 
 Dev steps
-1. Search from playlist videos
-
+1. 
 
 Made:
 - ~~use vuevideojs component (npm install vue-video-player)~~
@@ -45,6 +44,8 @@ Made:
 - Make basic json output and placeholders componet for player, videolists, chat, titles and footer
 - Change video from playlist links. Plus LIVE button to change to live
 - Change vuevideojs -> pure videojs
+- Chage playlist to own component
+- Filter-search from playlist videos
 
 
 Workflow plans:
@@ -54,4 +55,6 @@ App component
     - Show videos
 - playlist-component <--> item-component
     - Show archieved videos
+    - Delivery scr url to videoplayer-component
+- search-playlist-component
 - chat

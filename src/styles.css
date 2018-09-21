@@ -2,6 +2,12 @@
 
   body {
     background-color: #f1f1f1;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .app {
+
   }
 
   .header {
@@ -10,7 +16,9 @@
   }
 
   .main {
-    margin: 20px;
+    display: grid;
+    grid-template-columns: 640px auto;
+    grid-gap: 10px;
   }
 
   .videoplayer {
@@ -19,16 +27,20 @@
   }
 
   .playlist {
-    margin-left: 10px;
+    
     padding: 10px;
     background-color: white;
+    max-width: 300px;
   }
 
-
   .playlist-buttons {
-    width: 50%;
-    margin: 5px;
+    width: 100%;
+    margin-top: 5px;
+    max-width: 300px;
+  }
 
+  .searchbox {
+    width: 98%;
   }
 
   .chat {
