@@ -60,3 +60,10 @@ App component
     - Delivery scr url to videoplayer-component
 - search-playlist-component
 - chat
+
+
+
+
+Deploy to production
+
+CircleCI

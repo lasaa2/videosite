@@ -1,0 +1,11 @@
+dist
+node_modules
+.circleci
+.vscode
+dockerbuild
+.git
+.gitignore
+.eslintrc
+.dockerignore
+node_modules
+.editorconfig
