@@ -47,6 +47,8 @@ Made:
 - Chage playlist to own component
 - Filter-search from playlist videos
 
+Notes:
+- Backend / frontend to separate folders
 
 Workflow plans:
 

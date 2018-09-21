@@ -77,13 +77,9 @@ Vue.component('playlist-component', {
   },
 
   methods: {
-    onClickChild: function(value) {
+    onClickChild: function (value) {
       this.$emit('clicked', value);
     },
-
-    testFunk() {
-      console.log(this.searchStr);
-    }
 
   },
 
@@ -112,19 +108,17 @@ Vue.component('item-component', {
       // console.log(value);
       return `${value.name}`;
     },
-    url: function(value) {
+    url: function (value) {
       return `${value.url}`;
     }
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    onClickButton (value) {
+    onClickButton(value) {
       this.$emit('clicked', value.url);
     }
   },
-  template: 
-  `
+  template: `
     <div>
       <button class="playlist-buttons pure-button pure-button-primary" v-on:click="onClickButton(item)" :src="item | url">
       {{item | fullName}}
@@ -205,24 +199,29 @@ const app = new Vue({
 
   el: '#app',
   data: {
-      newUrl: '',
-      videos: [
-        { 
-          "id":"0", "name": "LIVE", "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
-        },
-        { 
-          "id":"1", "name": "Sample 1", "url": "http://vjs.zencdn.net/v/oceans.mp4"
-        },
-        { 
-          "id":"2", "name": "Sample 2", "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
-        }
-      ]
+    newUrl: '',
+    videos: [{
+        "id": "0",
+        "name": "LIVE",
+        "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
+      },
+      {
+        "id": "1",
+        "name": "Sample 1",
+        "url": "http://vjs.zencdn.net/v/oceans.mp4"
+      },
+      {
+        "id": "2",
+        "name": "Sample 2",
+        "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
+      }
+    ]
   },
 
   methods: {
 
     setPlaylistUrl(arr) {
-        this.newUrl = arr;
+      this.newUrl = arr;
     }
 
   },
