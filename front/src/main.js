@@ -179,7 +179,7 @@ Vue.component('title-component', {
 
   data() {
     return {
-      mainTitle: 'OUBS',
+      mainTitle: 'OUBSin studio',
       subTitle: 'Video Viewer'
     }
   },
