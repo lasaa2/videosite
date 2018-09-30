@@ -3,27 +3,26 @@
 version: 2
 jobs:
     build:
-        working_directory: ~/videosite
-        docker:
-            - image: circleci/node:8
-        
+        machine: true
+        working_directory: ~/front
         steps:
-            - checkout # tekee git clone toiminnon
-            - run:
-                name: Update npm
-                command: 'sudo npm install -g npm@latest'
-            - restore_cache: # special step to restore the dependency cache 
-                key: dependency-cache-{{ checksum "package.json" }}
-            - run:
-                name: install-npm-wee 
-                command: npm install # asennetaan tarvittavat paketit package.json mukaan, kaikki command komennot ovat normaaleja shell-komentoja
-            - save_cache: # special step to save the dependency cache
-                key: dependency-cache-{{ checksum "package.json" }}
-                paths:
-                  - ./node_modules
+            - checkout
+            # start proprietary DB using private Docker image
+            # with credentials stored in the UI
+            - run: |
+                docker login -u $DOCKER_USER -p $DOCKER_PASS
+                # docker run -d --name db company/proprietary-db:1.2.3
+
+            # build the application image
+            - run: docker build -t lasa/videosite:$CIRCLE_BRANCH .
+
+            # deploy the image
+            - run: docker push lasa/videosite:$CIRCLE_BRANCH
+            
             - run:
                 name: oubs-nasu
-                command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/videosite/; touch moi2"
-#            - run:
-#                name: docker-pull
-#                command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/videosite/; docker pull lasa/videosite; docker run -p 8080:3003 -e VIRTUAL_HOST=nasu.oubs.fi -e VIRTUAL_PORT=3003 --network=webproxy lasa/videosite"
+                command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "touch testifile"
+ #           - run:
+ #               name: docker-pull
+ #               command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "docker pull lasa/videosite; docker restart lasa/videosite"
+

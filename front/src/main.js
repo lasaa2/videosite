@@ -202,7 +202,7 @@ const app = new Vue({
     newUrl: '',
     videos: [{
         "id": "0",
-        "name": "LIVE",
+        "name": "live",
         "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
       },
       {
