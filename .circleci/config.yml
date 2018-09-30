@@ -24,6 +24,6 @@ jobs:
             - run:
                 name: oubs-nasu
                 command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/videosite/; touch moi2"
-            - run:
-                name: docker-pull
-                command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/videosite/; docker pull lasa/videosite; docker run -p 8080:3003 -e VIRTUAL_HOST=nasu.oubs.fi -e VIRTUAL_PORT=3003 --network=webproxy lasa/videosite"
+#            - run:
+#                name: docker-pull
+#                command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/videosite/; docker pull lasa/videosite; docker run -p 8080:3003 -e VIRTUAL_HOST=nasu.oubs.fi -e VIRTUAL_PORT=3003 --network=webproxy lasa/videosite"
