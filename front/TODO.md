@@ -33,6 +33,11 @@ https://wowza.oubs.fi/live/ngrp:oubs_all/playlist.m3u8
 For test playlist url:
 http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8
 
+Chatti:
+- Socket io 
+- Viestit välittää selaimelta toiselle
+- Viestit tallentuu palvelimelle, jokaisella videolla
+    - tehdään backend joka on rest api
 
 Dev steps
 1. 

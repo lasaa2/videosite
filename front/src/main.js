@@ -20,6 +20,7 @@ Vue.component('videoplayer-component', {
   data() {
     return {
       player: '',
+      defaultSrc: 'http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8',
       playerOptions: {
         autoplay: true,
         controls: true,
@@ -46,7 +47,7 @@ Vue.component('videoplayer-component', {
 
   mounted() {
     this.playerInit();
-    this.player.src(this.videos[0].url);
+    this.player.src(this.defaultSrc);
   },
 
   template: `
@@ -179,7 +180,7 @@ Vue.component('title-component', {
 
   data() {
     return {
-      mainTitle: 'OUBSin studio',
+      mainTitle: 'OUBS',
       subTitle: 'Video Viewer'
     }
   },
@@ -200,30 +201,21 @@ const app = new Vue({
   el: '#app',
   data: {
     newUrl: '',
-    videos: [{
-        "id": "0",
-        "name": "live",
-        "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
-      },
-      {
-        "id": "1",
-        "name": "Sample 1",
-        "url": "http://vjs.zencdn.net/v/oceans.mp4"
-      },
-      {
-        "id": "2",
-        "name": "Sample 2",
-        "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
-      }
-    ]
+    videos: [],
+  },
+
+  mounted() {
+    fetch("http://localhost:3002/api/videos")
+    .then(response => response.json())
+    .then((data) => {
+      this.videos = data;
+    })
   },
 
   methods: {
-
     setPlaylistUrl(arr) {
       this.newUrl = arr;
     }
-
   },
 
   template: `
@@ -232,6 +224,7 @@ const app = new Vue({
       <div class="main">
         <videoplayer-component class="" v-bind:newUrl="newUrl" :videos="videos"/>
         <playlist-component class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
+        <chat-component/>
       </div>
   </div>
   `
