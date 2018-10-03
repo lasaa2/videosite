@@ -4,10 +4,13 @@ import Vue from 'vue' // tuodaan käytettäväksi vue kirjastoa
 
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css' // tuodaan videojs tyylitiedosto
-import './assets/pure-min.css'
-import './assets/grids-responsive-min.css'
-import './styles.css'
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
+// import './assets/pure-min.css'
+// import './assets/grids-responsive-min.css'
+import './styles.css'
+Vue.use(iView);
 window.videojs = require('video.js');
 
 /* jos jsonin hakee tiedostosta value arvo filtterissä on yksi objekti eikä monta objektia, miksi? */
@@ -25,6 +28,9 @@ Vue.component('videoplayer-component', {
         autoplay: true,
         controls: true,
         muted: true,
+        fluid: true,
+        width: 640,
+        height: 340,
         poster: "https://oubs.fi/wp-content/uploads/2016/11/cropped-oubs_white_teksti_lapi_152px.png"
       }
     }
@@ -52,17 +58,19 @@ Vue.component('videoplayer-component', {
 
   template: `
   <div>  
-        <video  
-            id="player"
-              class="video-js videoplayer">
-            <p class="vjs-no-js">
-              To view this video please enable JavaScript, and consider upgrading to a
-              web browser that
-              <a href="http://videojs.com/html5-video-support/" target="_blank">
-                supports HTML5 video
-              </a>
-            </p>
-        </video>
+        <div class="videocontent">
+          <video  
+              id="player"
+                class="video-js vjs-default-skin vjs-big-play-centered">
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">
+                  supports HTML5 video
+                </a>
+              </p>
+          </video>
+        </div>
     </div>`
 });
 
@@ -121,9 +129,9 @@ Vue.component('item-component', {
   },
   template: `
     <div>
-      <button class="playlist-buttons pure-button pure-button-primary" v-on:click="onClickButton(item)" :src="item | url">
+      <i-button type="primary" long class="playlist-buttons" v-on:click="onClickButton(item)" :src="item | url">
       {{item | fullName}}
-      </button>
+      </i-button>
     </div>
     `
 });
@@ -220,12 +228,47 @@ const app = new Vue({
 
   template: `
   <div class="app">
-      <title-component/>
-      <div class="main">
+      <row>
+        <title-component class="header"/>
+      </row>
+    <row :gutter="16" class="main">
+      <i-col span="16">
         <videoplayer-component class="" v-bind:newUrl="newUrl" :videos="videos"/>
+      </i-col>
+      <i-col span="8">
         <playlist-component class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
-        <chat-component/>
-      </div>
+      </i-col>
+    </row>
   </div>
   `
 })
+
+
+/*
+<row>
+      <title-component/>
+      </row>
+<row :gutter="16">
+        <i-col :md="{ span: 16 }" :xs="{ span: 22 }">
+        <videoplayer-component class="" v-bind:newUrl="newUrl" :videos="videos"/>
+        </i-col>
+        <i-col :md="{ span: 8 }" :xs="{ span: 2 }">
+        <playlist-component class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
+        </i-col>
+       </row>
+
+
+
+       <row :gutter="10">
+        <i-col span="16">
+          <div class="laatikko1">
+          Video1
+          </div>
+        </i-col>
+        <i-col span="8">
+        <div class="laatikko2">
+            Video2
+            </div>
+        </i-col>
+      </row>    
+*/
