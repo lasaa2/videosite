@@ -11,8 +11,6 @@ jobs:
             # start proprietary DB using private Docker image
             # with credentials stored in the UI
             - setup_remote_docker
-                docker_layer_caching: true
-
             - run:
                 name: Install Docker client
                 command: |
