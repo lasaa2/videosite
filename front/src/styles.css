@@ -1,5 +1,69 @@
 /* Grid settings */
 
+body {
+  background-color: #f1f1f1;
+}
+
+.app {
+  
+}
+
+.header {
+  padding: 1px 20px 10px 20px;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.main {
+  max-width: 970px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.playlist-buttons {
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .playlist-buttons {
+    margin-top: 5px;
+    font-size: 10px;
+  }
+}
+
+.videocontent {
+  width: 100%;
+  max-width: 640px;
+}
+
+.searchbox {
+  width: 100%;
+}
+
+
+
+
+/*
+
+
+.laatikko1 {
+  border: 2px solid;
+  padding: 10px;
+  max-width: 640px;
+}
+.laatikko2 {
+  border: 2px solid;
+  padding: 10px;
+}
+
+
+
   body {
     background-color: #f1f1f1;
     margin-left: 5%;
@@ -33,12 +97,10 @@
     max-width: 300px;
   }
 
-  .playlist-buttons {
-    width: 100%;
-    margin-top: 5px;
-    max-width: 300px;
-  }
+  */
 
+  
+/*
   .searchbox {
     width: 98%;
   }
