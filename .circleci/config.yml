@@ -31,7 +31,7 @@ jobs:
             #- run:
             #    name: oubs-nasu
             #    command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "touch testifile"
-            #- run:
-            #    name: docker-pull
-            #    command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/dockerfiles/docker-videosite; docker-compose pull; docker-compose up -d"
+            - run:
+                name: docker-start
+                command: ssh -o "StrictHostKeyChecking no" oubsadmin@nasu.oubs.fi "cd ~/dockerfiles/docker-videosite; docker-compose up -d"
 
