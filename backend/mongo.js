@@ -1,3 +1,5 @@
+
+/*
 const mongoose = require('mongoose')
 
 // korvaa url oman tietokantasi urlilla. ethän laita salasanaa Githubiin!
@@ -24,3 +26,5 @@ message
     console.log('message saved!')
     mongoose.connection.close()
   })
+
+  */
