@@ -1,20 +1,16 @@
 <template>
     <div class="footer">
-    <span>Footer</span>
+        <h3>{{footerText}}</h3>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Footer'
+    name: 'Footer',
+    props: ['footerText']
 }
 </script>
 
-<style scoped>
-
-.footer {
-    background: #d1d1d1;
-    border: 1px solid;
-}
+<style>
 
 </style>

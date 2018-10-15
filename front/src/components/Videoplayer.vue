@@ -1,85 +1,72 @@
 <template>
-    <video playsinline id="myPlayer" class="video-js vjs-default-skin" width="100%" controls preload="auto" data-setup='{ "aspectRatio":"16:9" }'></video>
+    <div>  
+        <div class="videocontent">
+          <video  
+              id="player"
+                class="video-js vjs-default-skin vjs-big-play-centered">
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">
+                  supports HTML5 video
+                </a>
+              </p>
+          </video>
+        </div>
+    </div>
 </template>
 
 <script>
-    window.videojs = require('video.js');
+  
+  //import videojs from 'video.js'
+  import videojstyle from 'video.js/dist/video-js.css' // tuodaan videojs tyylitiedosto
 
-    export default {
-        name: 'Videolassi',
-        data(){
-            return{
-                player: '',
-                url: 'https://someurl.com',
-                volume: 1
-            };
-        },
-        methods: {
-            playerInitialize(){ 
-                this.player = videojs('myPlayer'); 
-            },
-            playerDispose(){ 
-                this.player.dispose(); 
-            },
+  window.videojs = require('video.js');
 
-            playerPlay(){
-                this.player.play();
-            },
-            playerPause(){
-                this.player.pause();
-            },
-
-
-            playerSetSrc(url){ 
-                this.player.src(url); 
-            },
-            playerSetVolume(float){
-                this.player.volume(float); 
-            },
-            playerSetPoster(url){ 
-                this.player.poster(url); 
-            },
-            playerSetTime(time){
-                this.player.currentTime(time);
-            },
-
-
-            playerEventEnded(){
-                console.log('ended');
-            },
-            playerEventVolume(){ 
-                this.volume = this.player.volume(); 
-            },
-            playerEventError(){ 
-                console.log( this.playerGetError() )
-            },
-
-
-            playerGetPaused(){
-                return this.player.paused();
-            },
-            playerGetTime(){
-                return this.player.currentTime();
-            },
-            playerGetError(){
-                return this.player.error().message;
-            },
-            
-            
-            playerSetupEvents(){
-                this.player.on('ended', function(){ var a = window.playerEvents.playerEventEnded(); });
-                this.player.on('volumechange', function(){ window.playerEvents.playerEventVolume(); });
-                this.player.on('error', function(){ window.playerEvents.playerEventError(); });
-            },
-        },
-        mounted(){
-            window.playerEvents = this;
-            this.playerInitialize();
-            this.playerSetSrc(this.url);
-            this.playerSetupEvents();
-        },
-        beforeDestroy() { 
-            this.playerDispose(); 
-        }
+  export default {
+  name: 'Videoplayer',
+  props: ['videos', 'newUrl'],
+  data() {
+    return {
+      player: '',
+      defaultSrc: 'http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8',
+      playerOptions: {
+        autoplay: true,
+        controls: true,
+        muted: true,
+        fluid: true,
+        aspectRatio: "16:9",
+        poster: "https://oubs.fi/wp-content/uploads/2016/11/cropped-oubs_white_teksti_lapi_152px.png"
+      }
     }
+  },
+
+  watch: {
+    // whenever newUrl changes, this function will run
+      newUrl: function (newUrl, oldUrl) {
+      this.player.src(newUrl);
+    }
+  },
+
+  methods: {
+    playerInit() {
+      this.player = videojs('player', this.playerOptions);
+    },
+
+    playerDispose(){ 
+        this.player.dispose(); 
+    },
+  },
+
+  mounted() {
+    //window.playerEvents = this;
+    this.playerInit();
+    this.player.src(this.defaultSrc);
+  },
+
+  beforeDestroy() { 
+        this.playerDispose(); 
+    }
+};
+
 </script>
