@@ -1,84 +1,67 @@
 <template>
   <div class="app">
-    <Title/>
-    <Videoplayer/>
-    <Playlist/>
-    <Chat/>
-    <Footer/>
+    <Row>
+        <Title :mainTitle="mainTitle" :subTitle="subTitle" class="header"/>
+    </Row>
+    <Row class="main">
+        <Col span="16">
+          <Videoplayer class="" v-bind:newUrl="newUrl" :videos="videos"/>
+        </Col>
+        <Col span="8">
+          <Playlist class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
+        </Col>
+    </Row>
+    <Row>
+      <Footer :footerText="footerText"/>
+    </Row>
   </div>
 </template>
 
 <script>
+
 import Title from './components/Title'
 import Videoplayer from './components/Videoplayer'
 import Playlist from './components/Playlist'
-import Chat from './components/Chat'
 import Footer from './components/Footer'
+import './styles.css'
 
 export default {
   name: 'App',
+  props: ['videojs'],
   components: {
     Title,
     Videoplayer,
     Playlist,
-    Chat,
     Footer
   },
 
-  data () {
+  data() {
     return {
-      name: "moi"
+      mainTitle: "OUBS videoplayer",
+      subTitle: "",
+      footerText: "© OUBS",
+      videos: [],
+      newUrl: ''
     }
-  }
+  },
+
+  mounted() {
+    fetch("http://localhost:3002/api/videos")
+    .then(response => response.json())
+    .then((data) => {
+      this.videos = data;
+    })
+  },
+
+  methods: {
+    setPlaylistUrl(arr) {
+      this.newUrl = arr;
+    }
+  },
 }
 
 </script>
 
 <style>
 
-/* Grid settings */
-
-.app {
-  display: grid;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-}
-
-.title {
-  grid-column-start: 1;
-  grid-column-end: 8;
-  padding: 0 10px 0 10px;
-}
-
-.videoplayer {
-  grid-column-start: 1;
-  grid-column-end: 7;
-}
-
-.playlist {
-  grid-column-start: 7;
-  grid-column-end: 8;
-  text-align: center;
-}
-
-.chat {
-  grid-column-start: 1;
-  grid-column-end: 8;
-  text-align: center;
-}
-
-.footer {
-  grid-column-start: 1;
-  grid-column-end: 8;
-  text-align: center;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
 </style>

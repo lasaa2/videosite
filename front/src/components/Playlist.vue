@@ -1,40 +1,48 @@
 <template>
-    <div class="playlist">
-    <span>Playlist window</span>
-        <ol>
-            <li 
-            v-for="item in data.videos"
-            v-bind:key="item.id"
-            >
-            <a 
-            v-bind:href="item.url">
-            {{item.name}}
-            </a>
-            </li>
-        </ol>
-    </div>
+    <div>
+        <h2>Playlist</h2>
+        <Search v-model="search"/>
+        <Playlistitem v-on:clicked="onClickChild" v-for="item in filteredList" :item="item" :key="item.id"/>
+  </div>
 </template>
 
 <script>
 
-import json from '../data.json';
+import Playlistitem from './Playlistitem';
+import Search from './Search';
 
 export default {
-    name: 'Playlist',
-    data () {
-        return {
-            data : json
-        }
-    }
-}
+  name: 'Playlist',
+  props: ['videos'],
+  components: {
+      Playlistitem,
+      Search
+  },
 
+  data() {
+    return {
+      search: '',
+    }
+  },
+
+  methods: {
+    onClickChild: function (value) {
+      this.$emit('clicked', value);
+    },
+
+  },
+
+  computed: {
+    filteredList() {
+      return this.videos.filter(video => {
+        return video.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  },
+};
 </script>
 
-<style scoped>
+<style>
 
-.playlist {
-    background: #d1d1d1;
-    border: 1px solid;
-}
 
 </style>

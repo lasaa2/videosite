@@ -1,22 +1,33 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue' // tuodaan käytettäväksi vue kirjastoa
+import App from './App'
 
-import videojs from 'video.js'
-import 'video.js/dist/video-js.css' // tuodaan videojs tyylitiedosto
+Vue.config.productionTip = false
+
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
 // import './assets/pure-min.css'
 // import './assets/grids-responsive-min.css'
-import './styles.css'
+//import './styles.css'
 Vue.use(iView);
-window.videojs = require('video.js');
+// window.videojs = require('video.js');
 
 /* jos jsonin hakee tiedostosta value arvo filtterissä on yksi objekti eikä monta objektia, miksi? */
 // import json from './data.json';
 
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  template: '<App/>',
+  components: { App }
+})
+
+
 /* Videoplayer component */
+
+/*
 
 Vue.component('videoplayer-component', {
   props: ['videos', 'newUrl'],
@@ -75,6 +86,7 @@ Vue.component('videoplayer-component', {
 });
 
 /* Playlist component */
+/*
 
 Vue.component('playlist-component', {
   props: ['videos'],
@@ -110,6 +122,7 @@ Vue.component('playlist-component', {
 
 /* Playlist ITEM component */
 
+/*
 Vue.component('item-component', {
   props: ['item'],
   filters: {
@@ -137,7 +150,7 @@ Vue.component('item-component', {
 });
 
 /* Search component */
-
+/*
 Vue.component('search-playlist-component', {
   props: ['value'],
   template: `
@@ -148,7 +161,7 @@ Vue.component('search-playlist-component', {
 });
 
 /* Chat */
-
+/*
 Vue.component('chat-component', {
 
   data() {
@@ -183,7 +196,7 @@ Vue.component('chat-component', {
 
 
 /* Title */
-
+/*
 Vue.component('title-component', {
 
   data() {
@@ -200,10 +213,10 @@ Vue.component('title-component', {
     <h2> {{ subTitle }}</h2>
   </div>`
 })
-
+*/
 
 /* App */
-
+/*
 const app = new Vue({
 
   el: '#app',
@@ -227,8 +240,7 @@ const app = new Vue({
   },
 
   template: `
-  <div class="app">
-      <row>
+  <row>
         <title-component class="header"/>
       </row>
     <row :gutter="16" class="main">
@@ -239,36 +251,8 @@ const app = new Vue({
         <playlist-component class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
       </i-col>
     </row>
-  </div>
+  
   `
 })
 
-
-/*
-<row>
-      <title-component/>
-      </row>
-<row :gutter="16">
-        <i-col :md="{ span: 16 }" :xs="{ span: 22 }">
-        <videoplayer-component class="" v-bind:newUrl="newUrl" :videos="videos"/>
-        </i-col>
-        <i-col :md="{ span: 8 }" :xs="{ span: 2 }">
-        <playlist-component class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
-        </i-col>
-       </row>
-
-
-
-       <row :gutter="10">
-        <i-col span="16">
-          <div class="laatikko1">
-          Video1
-          </div>
-        </i-col>
-        <i-col span="8">
-        <div class="laatikko2">
-            Video2
-            </div>
-        </i-col>
-      </row>    
 */
