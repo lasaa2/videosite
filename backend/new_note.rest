@@ -1,8 +1,8 @@
-POST http://localhost:3001/notes
+POST http://localhost:3002/api/messages
 Content-Type: application/json
 
 {
-    "content": "moikka",
-    "kentta1": "pa",
+    "content": "uyguyguy",
+    "important": true,
     "kentta2": "ma"
 }
