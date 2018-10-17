@@ -40,13 +40,32 @@ app.get('/api/messages', (request, response) => {
     })
 })
 
-app.get('/api/notes/:id', (request, response) => {
-  Note
+app.get('/api/messages/:id', (request, response) => {
+  Message
     .findById(request.params.id)
-    .then(note => {
-      response.json(formatNote(note))
+    .then(message => {
+      if (message) {
+        response.json(formatMessage(message))
+      } else {
+        response.status(404).end()
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      response.status(400).send({ error: 'malformatted id' })
     })
 })
+
+/* ilman virheenkäsittelyä */
+/*
+app.get('/api/messages/:id', (request, response) => {
+  Message
+    .findById(request.params.id)
+    .then(message => {
+      response.json(formatMessage(message))
+    })
+})
+*/
 
 /* POSTERIT / SETTERIT */
 
@@ -70,6 +89,55 @@ app.post('/api/messages', (request, response) => {
     })
 })
 
+/* UPDATET */
+
+app.put('/api/messages/:id', (request, response) => {
+  const body = request.body
+
+  const message = {
+    content: body.content,
+    important: body.important
+  }
+
+  Message
+    .findByIdAndUpdate(request.params.id, message, { new: true } )
+    .then(updatedMessage => {
+      response.json(formatMessage(updatedMessage))
+    })
+    .catch(error => {
+      console.log(error)
+      response.status(400).send({ error: 'malformatted id' })
+    })
+})
+
+/* DELETET */
+
+app.delete('/api/messages/:id', (request, response) => {
+  Message
+    .findByIdAndRemove(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => {
+      response.status(400).send({ error: 'malformatted id' })
+    })
+})
+
+/* VIRHEET */
+
+// in case of error
+
+const error = (request, response) => {
+  response.status(404).send({error: 'unknown endpoint'})
+}
+
+app.use(error)
+
+// Listen
+const PORT = 3002
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
 
 /*
 let videos = [
@@ -206,15 +274,4 @@ let messages = [
   }
 
 */
-  // in case of error
-  const error = (request, response) => {
-    response.status(404).send({error: 'unknown endpoint'})
-  }
   
-  app.use(error)
-
-  // Listen
-  const PORT = 3002
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-  })

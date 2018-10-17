@@ -1,8 +1,6 @@
-POST http://localhost:3002/api/messages
+PUT http://localhost:3002/api/messages/5bc6c7fcf73520011e29d98b
 Content-Type: application/json
 
 {
-    "content": "uyguyguy",
-    "important": true,
-    "kentta2": "ma"
+    "content": "CHANGE"
 }
