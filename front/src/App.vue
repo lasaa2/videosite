@@ -12,6 +12,9 @@
         </Col>
     </Row>
     <Row>
+        <Chat/>
+    </Row>
+    <Row>
       <Footer :footerText="footerText"/>
     </Row>
   </div>
@@ -22,6 +25,7 @@
 import Title from './components/Title'
 import Videoplayer from './components/Videoplayer'
 import Playlist from './components/Playlist'
+import Chat from './components/Chat'
 import Footer from './components/Footer'
 import './styles.css'
 
@@ -32,6 +36,7 @@ export default {
     Title,
     Videoplayer,
     Playlist,
+    Chat,
     Footer
   },
 
