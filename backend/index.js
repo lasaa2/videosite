@@ -1,4 +1,6 @@
+//const db = require('./models/db')
 const Message = require('./models/message') // DB conf
+//const Video = require('./models/video') // DB conf
 
 const express = require('express') // yleinen node web ohjelma
 const app = express() // luodaan uusi web palvelin expressin avulla
@@ -20,6 +22,25 @@ app.use(logger)
 app.use(cors()) // asetetaan app olio käyttämään cors:ia
 app.use(bodyParser.json()) // asetetaan app olio käyttämään bodyparseria
 
+/*
+let videos = [
+  {
+    "id": "0",
+    "name": "Live",
+    "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
+  },
+  {
+    "id": "1",
+    "name": "Sample 1",
+    "url": "http://vjs.zencdn.net/v/oceans.mp4"
+  },
+  {
+    "id": "2",
+    "name": "Sample 2",
+    "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
+  }
+]
+*/
 
 const formatMessage = (message) => {
   return {
@@ -27,6 +48,14 @@ const formatMessage = (message) => {
     date: message.date,
     important: message.important,
     id: message._id
+  }
+}
+
+const formatVideo = (video) => {
+  return {
+    name: video.name,
+    url: video.url,
+    id: video._id
   }
 }
 
@@ -66,6 +95,14 @@ app.get('/api/messages/:id', (request, response) => {
     })
 })
 */
+
+app.get('/api/videos', (request, response) => {
+  Video
+    .find({})
+    .then(videos => {
+      response.json(videos.map(formatVideo))
+    })
+})
 
 /* POSTERIT / SETTERIT */
 
@@ -140,23 +177,7 @@ app.listen(PORT, () => {
 })
 
 /*
-let videos = [
-  {
-    "id": "0",
-    "name": "Live",
-    "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
-  },
-  {
-    "id": "1",
-    "name": "Sample 1",
-    "url": "http://vjs.zencdn.net/v/oceans.mp4"
-  },
-  {
-    "id": "2",
-    "name": "Sample 2",
-    "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
-  }
-]
+
 
 let messages = [
   {
@@ -195,8 +216,6 @@ let messages = [
 
   /* Videorajapinta */
 
-/*
-
   // Return all videos
   app.get('/api/videos', (request, response) => {
     response.json(videos)
@@ -212,7 +231,7 @@ let messages = [
         response.status(404).end()
     }
   })
-*/
+
   /* Chat viestit */
 
 /*
