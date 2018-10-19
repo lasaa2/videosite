@@ -31,7 +31,7 @@
       player: '',
       defaultSrc: 'http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8',
       playerOptions: {
-        autoplay: true,
+        autoplay: false,
         controls: true,
         muted: true,
         fluid: true,
