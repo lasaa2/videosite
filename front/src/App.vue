@@ -12,7 +12,7 @@
         </Col>
     </Row>
     <Row>
-        <Chat :messages="messages"/>
+        <Chat/>
     </Row>
     <Row>
       <Footer :footerText="footerText"/>
@@ -28,6 +28,8 @@ import Playlist from './components/Playlist'
 import Chat from './components/Chat'
 import Footer from './components/Footer'
 import './styles.css'
+
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -63,7 +65,6 @@ export default {
           }
         ],
       newUrl: '',
-      messages: []
     }
   },
   
@@ -77,20 +78,10 @@ export default {
     })
   },
   */
-
-  mounted() {
-    fetch("http://localhost:3002/api/messages")
-    .then(response => response.json())
-    .then((data) => {
-      this.messages = data;
-      console.log("App messages", data);
-    })
-  },
-
   methods: {
     setPlaylistUrl(arr) {
       this.newUrl = arr;
-    }
+    },
   },
 }
 

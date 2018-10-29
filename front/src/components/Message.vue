@@ -33,7 +33,7 @@ export default {
     },
 
     methods: {
-        removeMessage(value) {
+        removeMessage: function(value) {
             this.$emit('clicked', value);
         }
     }
@@ -43,7 +43,6 @@ export default {
 
 <style>
 #message-all {
-    background-color: ;
     margin: 10px;
     padding: 5px;
     color: white;
