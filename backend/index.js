@@ -172,9 +172,21 @@ app.use(error)
 
 // Listen
 const PORT = 3002
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+const io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+    console.log('User: ', socket.id, ' connected.')
+    socket.on('SEND_MESSAGE', function(data) {
+        io.emit('MESSAGE', data)
+    });
+    socket.on('disconnect', function(){
+      console.log('user ', socket.id, ' disconnected');
+    });
+});
 
 /*
 

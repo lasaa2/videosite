@@ -8,6 +8,10 @@ Vue.config.productionTip = false
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
+import BootstrapVue from 'bootstrap-vue'
+
+Vue.use(BootstrapVue);
+
 // import './assets/pure-min.css'
 // import './assets/grids-responsive-min.css'
 //import './styles.css'
