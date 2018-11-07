@@ -24,6 +24,7 @@
     "socket.io-client": "^2.1.1",
     "video.js": "7.0.5",
     "vue": "^2.5.2",
+    "vue-moment": "^4.0.0",
     "vue-video-player": "^5.0.2"
   },
   "devDependencies": {

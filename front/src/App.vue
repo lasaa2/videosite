@@ -14,9 +14,6 @@
     <Row>
         <Chat/>
     </Row>
-    <Row>
-      <Footer :footerText="footerText"/>
-    </Row>
   </div>
 </template>
 
