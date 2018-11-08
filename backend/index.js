@@ -56,7 +56,6 @@ const formatMessage = (message) => { // funktio joka "siivoaa" tietokantaan tall
     user: message.user,
     content: message.content,
     date: message.date,
-    important: message.important,
     id: message._id
   }
 }
@@ -204,7 +203,6 @@ io.on('connection', function(socket) { // määritellään io:n on metodia käyt
         const message = new Message({ // CREATE new message for DB
           user: data.user,
           content: data.message,
-          important: false,
           date: new Date()
         })
       
@@ -215,7 +213,6 @@ io.on('connection', function(socket) { // määritellään io:n on metodia käyt
             io.emit('message', savedMessage)
             //response.json(formatMessage(savedMessage))
           })
-
     });
 
     socket.on('disconnect', function(){

@@ -68,8 +68,7 @@ export default {
             })
 
         this.socket.on('message', function (data) { // listen new messages from database via backend, and push them ”messages"
-            const parse = JSON.parse(data)
-            console.log(parse)
+            console.log('Lähetetty viesti: ', data)
             this.messages.push(data)
         }.bind(this))
     },
