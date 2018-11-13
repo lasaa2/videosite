@@ -1,20 +1,19 @@
 
 
 <template>
-    <div class="popup-box chat-popup">
-
-        <div class="chats">
-            <div v-for="(msg, index) in messages" :key="index">      
-                <div class="popup-messages">
-                    <p class="time-left">{{msg.date | formatDate}}
-                    {{ msg.user }} <span>says:</span> 
-                    </p> {{ msg.content }}
+    <div class="chat-body">
+        <div class="messages" id="messageBody">
+                <div v-for="(msg, index) in messages" :key="index">      
+                    <div class="popup-messages">
+                        <p class="time-right">{{msg.date | formatDate}}
+                        <b>{{ msg.user }} says:</b> {{ msg.content}}
+                        </p>
+                    </div>
                 </div>
-
-            </div>
         </div>
+        
 
-        <form @submit.prevent="sendMessage">
+        <form class="chat-input-body" @submit.prevent="sendMessage">
             
             <input placeholder="user" v-model="user">
             
@@ -27,8 +26,6 @@
 </template>
 
 <script>
-
-/* Viestin laitto tietokantaan toimii, getteri ei toimi.? */
 
 import Message from './Message'
 import axios from 'axios'
@@ -68,15 +65,19 @@ export default {
             })
 
         this.socket.on('message', function (data) { // listen new messages from database via backend, and push them ”messages"
-            console.log('Lähetetty viesti: ', data)
+            // console.log('Lähetetty viesti: ', data)
             this.messages.push(data)
         }.bind(this))
     },
 
+    updated() {
+        this.scrollBottom()
+    },
+
     filters: {
         formatDate: (value) => {
-            return moment(String(value)).format('DD/MM/YYYY hh:mm:ss')
-        }
+            return moment(String(value)).format('HH:mm:ss')
+        },
     },
 
     methods: {
@@ -92,6 +93,8 @@ export default {
                 message: this.message,
                 });
             }
+            
+            this.message = ""
         },
         
         addMessage() {
@@ -115,14 +118,17 @@ export default {
             .catch(error => console.error('Error:', error));
         },
 
-        
+        scrollBottom: () => {
+            const msgBody = document.querySelector('#messageBody');
+            msgBody.scrollTop = msgBody.scrollHeight - msgBody.clientHeight - 1
+        }
+
     }  
 }
 
 </script>
 
 <style>
-
 
 @media only screen and (max-width : 540px) 
             {
@@ -136,50 +142,23 @@ export default {
                     display: none !important;
                 }
             }
-            
-            /* Määritellään popup-boxin koko ja yleiset sälät  */
 
-            .popup-box
-            {
-                display: block;
-                position: fixed;
-                bottom: 0px;
-                right: 20px;
-                height: 285px;
-                background-color: rgb(237, 239, 244);
-                width: 300px;
-                border: 1px solid rgba(29, 49, 91, .3);
+
+            .chat-body {
+                background-color: black;
+                color:wheat;
+                margin-top: 8px;
+                padding: 10px;
+                font-size: 13px;
+                font-family: 'Courier New', Courier, monospace;
             }
-            
-            .popup-box .popup-head
-            {
-                background-color: #6d84b4;
-                padding: 5px;
-                color: white;
-                font-weight: bold;
-                font-size: 14px;
-                clear: both;
-            }
-            
-            .popup-box .popup-head .popup-head-left
-            {
-                float: left;
-            }
-            
-            .popup-box .popup-head .popup-head-right
-            {
-                float: right;
-                opacity: 0.5;
-            }
-            
-            .popup-box .popup-head .popup-head-right a
-            {
-                text-decoration: none;
-                color: inherit;
+
+            .chat-input-body {
+                margin-top:5px;
             }
 
             /* Tekee asian että input pysyy paikallaan */
-            .chats {
+            .messages {
                     height: 260px;
                 overflow-x: scroll;
                 overflow-x: hidden;

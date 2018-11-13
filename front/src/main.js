@@ -7,20 +7,18 @@ Vue.config.productionTip = false
 
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+Vue.use(iView);
+
+//import './styles.css'
 
 import BootstrapVue from 'bootstrap-vue'
-Vue.use(require('vue-moment'));
-
 Vue.use(BootstrapVue);
 
-// import './assets/pure-min.css'
-// import './assets/grids-responsive-min.css'
-//import './styles.css'
-Vue.use(iView);
-// window.videojs = require('video.js');
+import VueChatScroll from 'vue-chat-scroll'
+Vue.use(VueChatScroll);
 
-/* jos jsonin hakee tiedostosta value arvo filtterissä on yksi objekti eikä monta objektia, miksi? */
-// import json from './data.json';
+Vue.use(require('vue-moment')); // ajan näyttämiseen
+
 
 /* eslint-disable no-new */
 new Vue({

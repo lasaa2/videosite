@@ -11,8 +11,12 @@
           <Playlist class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
         </Col>
     </Row>
-    <Row>
-        <Chat/>
+    <Row class="main">
+      <Col span="16">
+          <Chat/>
+      </Col>
+      <Col span="8">
+      </Col>
     </Row>
   </div>
 </template>
