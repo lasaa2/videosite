@@ -56,7 +56,7 @@ export default {
   
   mounted() {
 
-    console.log(this.backendUrl)
+    //console.log(this.backendUrl)
 
     /* Videohaku */
 

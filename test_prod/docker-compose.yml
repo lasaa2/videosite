@@ -1,14 +1,13 @@
-
-version: '3'
+version: '3.2'
 services:
 # For prod!
   front:
-    image: front:latest
+    build: ../front
     container_name: "videosite-front"
     depends_on: 
       - backend
     ports:
-      - 8080:8080
+      - 80:8080
     #command: bash -c "npm install && npm run dev"
     #working_dir: /src
     #volumes:
@@ -18,7 +17,7 @@ services:
       ROOT_API: localhost:3002
 
   backend:
-    image: backend:latest
+    build: ../backend
     container_name: "videosite-backend"
     depends_on: 
       - mongo
@@ -29,6 +28,7 @@ services:
     #working_dir: /src
     #volumes:
     #  - "./backend:/src"
+
     environment:
       HOST: 0.0.0.0
       MONGODB_URI: mongodb://mongo/
