@@ -10,6 +10,6 @@ COPY package.json .
 RUN npm install
 COPY . .
 
-CMD ["npm", "start"]
+EXPOSE 3002
 
-# EXPOSE 3004
+CMD ["npm", "start"]

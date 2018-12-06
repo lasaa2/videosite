@@ -10,6 +10,7 @@ if ( process.env.NODE_ENV !== 'production' ) {
 }
 
 const url = process.env.MONGODB_URI; // host is "mongo", because docker-compose conf is "mongo". Port is also not needed.
+//const url = "mongodb://mongo/"
 
 const options = { //mongodb options
   promiseLibrary: require('bluebird'),
@@ -80,16 +81,21 @@ const formatVideo = (video) => { // funktio joka "siivoaa" tietokantaan tallenne
 let videos = [
   {
     "id": "0",
-    "name": "Live",
+    "name": "Live-sample",
     "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
   },
   {
     "id": "1",
+    "name": "Live",
+    "url": "http://wowza.oubs.fi/live/oubs/playlist.m3u8"
+  },
+  {
+    "id": "2",
     "name": "Sample 1",
     "url": "http://vjs.zencdn.net/v/oceans.mp4"
   },
   {
-    "id": "2",
+    "id": "3",
     "name": "Sample 2",
     "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
   }

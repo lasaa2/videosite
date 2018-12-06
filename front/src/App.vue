@@ -13,7 +13,7 @@
     </Row>
     <Row class="main">
       <Col span="16">
-          <Chat/>
+          <Chat :backendUrl="backendUrl"/>
       </Col>
       <Col span="8">
       </Col>
@@ -50,16 +50,17 @@ export default {
       footerText: "© OUBS",
       videos: [],
       newUrl: '',
+      backendUrl: process.env.ROOT_API
     }
   },
   
   mounted() {
 
-    //console.log("localhost:3002")
+    console.log(this.backendUrl)
 
     /* Videohaku */
 
-    fetch('http://localhost:3002/api/videos')
+    fetch('http://' + this.backendUrl + '/api/videos')
     .then(response => response.json())
     .then((data) => {
       this.videos = data;

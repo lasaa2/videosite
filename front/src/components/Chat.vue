@@ -49,18 +49,19 @@ export default {
             user: '',
             message: '',
             messages: [],
-            socket : io('localhost:3002'),
+            socket : io(this.backendUrl),
             time: String,
-            errors: []
+            errors: [],
+            //backendUrl: this.backendUrl
         }
     },
 
     mounted() {
-        //console.log('CHAT')
+        //console.log(this.backendUrl)
     },
 
     created() {
-        axios.get('http://localhost:3002/api/messages') // reveice message database
+        axios.get('http://' + this.backendUrl + '/api/messages') // reveice message database
             .then((response) => {
             this.messages = response.data;
             })
