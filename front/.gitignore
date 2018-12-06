@@ -2,10 +2,9 @@
 Thumbs.db
 db.json
 *.log
+dist/
 node_modules/
 public/
 .deploy*/
 src/_drafts
-dist/
-videosite.code-workspace
-test/
+.env

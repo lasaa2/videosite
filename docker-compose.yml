@@ -15,6 +15,7 @@ services:
       - "./front:/src"
     environment:
       HOST: 0.0.0.0
+      ROOT_API: localhost:3002
 
   backend:
     image: node:8.9.4
@@ -30,6 +31,7 @@ services:
       - "./backend:/src"
     environment:
       HOST: 0.0.0.0
+      MONGODB_URI: mongodb://mongo/test
       #- SET_CONTAINER_TIMEZONE=true
       #- CONTAINER_TIMEZONE=Europe/Helsinki
 

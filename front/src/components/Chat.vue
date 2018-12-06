@@ -12,7 +12,6 @@
                 </div>
         </div>
         
-
         <form class="chat-input-body" @submit.prevent="sendMessage">
             
             <input placeholder="user" v-model="user">
@@ -42,20 +41,27 @@ export default {
         Message
     },
 
+    props: ['backendUrl'],
+
     data() {
         return {
             newMessage: "",
             user: '',
             message: '',
             messages: [],
-            socket : io('localhost:3002'),
+            socket : io(this.backendUrl),
             time: String,
-            errors: []
+            errors: [],
+            //backendUrl: this.backendUrl
         }
     },
 
+    mounted() {
+        //console.log(this.backendUrl)
+    },
+
     created() {
-        axios.get('http://localhost:3002/api/messages') // reveice message database
+        axios.get('http://' + this.backendUrl + '/api/messages') // reveice message database
             .then((response) => {
             this.messages = response.data;
             })
@@ -96,33 +102,11 @@ export default {
             
             this.message = ""
         },
-        
-        addMessage() {
-            const msgObject = {
-                content: this.newMessage,
-            }
-
-            axios.post('http://localhost:3002/api/messages', msgObject)
-                .then(response => {
-                console.log(response)
-            })
-        },
-
-        deleteMessage: (value) => {
-            console.log(value);
-
-            fetch("http://localhost:3002/api/messages/" + value, {
-            method: 'DELETE', // or 'PUT'
-            })
-            .then(response => console.log('Success:', JSON.stringify(response)))
-            .catch(error => console.error('Error:', error));
-        },
 
         scrollBottom: () => {
             const msgBody = document.querySelector('#messageBody');
             msgBody.scrollTop = msgBody.scrollHeight - msgBody.clientHeight - 1
         }
-
     }  
 }
 

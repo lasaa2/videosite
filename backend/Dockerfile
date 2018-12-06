@@ -4,12 +4,12 @@ FROM node:8.9-alpine
 
 # From here we load our application's code in, therefore the previous docker# "layer" thats been cached will be used if possibleWORKDIR /usr/src/appADD . /usr/src/app
 
-WORKDIR /usr/app
+WORKDIR /src
 
 COPY package.json .
 RUN npm install
 COPY . .
 
-CMD ["npm", "start"]
+EXPOSE 3002
 
-# EXPOSE 3004
+CMD ["npm", "start"]

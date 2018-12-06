@@ -5,7 +5,12 @@
 
 */
 
-const url = 'mongodb://mongo/test'; // host is "mongo", because docker-compose conf is "mongo". Port is also not needed.
+if ( process.env.NODE_ENV !== 'production' ) {
+  require('dotenv').config()
+}
+
+const url = process.env.MONGODB_URI; // host is "mongo", because docker-compose conf is "mongo". Port is also not needed.
+//const url = "mongodb://mongo/"
 
 const options = { //mongodb options
   promiseLibrary: require('bluebird'),
@@ -48,6 +53,9 @@ app.use(logger) // asetetaan app olio käyttämään juuri määriteltyä logger
 app.use(cors()) // asetetaan app olio käyttämään cors:ia
 app.use(bodyParser.json()) // asetetaan app olio käyttämään bodyparseria
 
+/* FRONT tarjotaan backendistä */ 
+
+app.use(express.static('dist'))
 
 /* SIIVOUS FUNKTIOT, voisiko nämä yhdistää? */
 
@@ -67,6 +75,32 @@ const formatVideo = (video) => { // funktio joka "siivoaa" tietokantaan tallenne
     id: video._id
   }
 }
+
+/* DEMODATA */
+
+let videos = [
+  {
+    "id": "0",
+    "name": "Live-sample",
+    "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
+  },
+  {
+    "id": "1",
+    "name": "Live",
+    "url": "http://wowza.oubs.fi/live/oubs/playlist.m3u8"
+  },
+  {
+    "id": "2",
+    "name": "Sample 1",
+    "url": "http://vjs.zencdn.net/v/oceans.mp4"
+  },
+  {
+    "id": "3",
+    "name": "Sample 2",
+    "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
+  }
+]
+
 
 /* GETTERIT */
 
@@ -95,6 +129,9 @@ app.get('/api/messages/:id', (request, response) => {
     })
 })
 
+
+/* Video getteri, haku tietokannasta */
+/*
 app.get('/api/videos', (request, response) => {
   Video
     .find({})
@@ -103,22 +140,13 @@ app.get('/api/videos', (request, response) => {
     })
 })
 
+*/
+
 /* Videorajapinta */
 
   // Return all videos
   app.get('/api/videos', (request, response) => {
     response.json(videos)
-  })
-
-  // Return video filtered by ID
-  app.get('/videos/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const video = videos.find(video => video.id === id)
-    if (video) {
-        response.json(video)
-    } else {
-        response.status(404).end()
-    }
   })
 
 /* POSTERIT / SETTERIT */
@@ -219,139 +247,3 @@ io.on('connection', function(socket) { // määritellään io:n on metodia käyt
       console.log('User ', socket.id, ' disconnected');
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-let messages = [
-  {
-    id: 1,
-    content: 'HTML on helppoa',
-    date: '2017-12-10T17:30:31.098Z',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Selain pystyy suorittamaan vain javascriptiä',
-    date: '2017-12-10T18:39:34.091Z',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2017-12-10T19:20:14.298Z',
-    important: true
-  }
-]
-*/
-
-  
-/*
-  app.get('/', (req, res) => {
-    res.send('<a href="api">API</a>')
-  })
-
-  app.get('/api', (req, res) => {
-    res.send('<h1>Rajapinta videoille ja viesteille</h1><p>Käyttö: <li>videot: <a href="api/videos">/api/videos</a></li><li>viestit: <a href="api/messages">/api/messages</a></li></p>')
-  })
-
-*/
-
-
-  
-
-  /* Chat viestit */
-
-/*
-
-  // Return all messages
-  app.get('/api/messages', (request, response) => {
-    Message
-      .find({}, {__v: 0})
-      .then(messages => {
-        response.json(messages.map(formatMessage))
-      })
-  })
-  
-  // Return messages filtered by id
-  app.get('/api/messages/:id', (request, response) => {
-    Message
-      .findById(request.params.id)
-      .then(message => {
-        response.json(formatMessage(message))
-      })
-  })
-
-  // Save message to database
-  app.post('/api/messages', (request, response) => {
-    const body = request.body
-  
-    if (body.content === undefined) {
-      return response.status(400).json({error: 'content missing'})
-    }
-  
-    const message = new Message({
-      content: body.content,
-      important: body.important || false,
-      date: new Date()
-    })
-  
-    message
-      .save()
-      .then(savedMessage => {
-        response.json(formatMessage(savedMessage))
-      })
-  })
-
-  // Delete message from database
-  app.delete('/api/messages/:id', (request, response) => {
-    const id = Number(request.params.id)
-    message = message.filter(message => message.id !== id)
-  
-    response.status(204).end()
-  })
-
-  const formatMessage = (message) => {
-    return {
-      content: message.content,
-      date: message.date,
-      important: message.important,
-      id: message._id
-    }
-  }
-
-*/
-  
-
-/*
-let videos = [
-  {
-    "id": "0",
-    "name": "Live",
-    "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
-  },
-  {
-    "id": "1",
-    "name": "Sample 1",
-    "url": "http://vjs.zencdn.net/v/oceans.mp4"
-  },
-  {
-    "id": "2",
-    "name": "Sample 2",
-    "url": "https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_2mb.mp4"
-  }
-]
-*/
