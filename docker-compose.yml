@@ -14,8 +14,9 @@ services:
     volumes:
       - "./front:/src"
     environment:
-      HOST: 0.0.0.0
-      ROOT_API: localhost:3002
+      - TESTI=http://testi
+      - HOST=0.0.0.0
+      - ROOT_API=localhost:3002
 
   backend:
     image: node:8.9.4
