@@ -9,14 +9,13 @@ if ( process.env.NODE_ENV !== 'production' ) {
   require('dotenv').config()
 }
 
-const mongoose = require('./models/db')
+/* MODULES */
 
+const mongoose = require('./models/db') // mongodb connection
 const Message = require('./models/message') // Tuodaan mongodb schemat, joilla määritellään miten tietoa tallennetaan tietokantaan
-
 
 const express = require('express') // yleinen node web ohjelma
 const app = express() // luodaan uusi web palvelin expressin avulla
-
 
 const bodyParser = require('body-parser') // tarvitaan viestien tallennukseen, post palautusten käsittelyyn
 const cors = require('cors') // tarvitaan jotta front ja backend voi olla eri portissa

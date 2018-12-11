@@ -56,7 +56,7 @@ export default {
   
   mounted() {
 
-    //console.log(this.backendUrl)
+    console.log("ROOT_API / API_URL:", process.env.ROOT_API)
 
     /* Videohaku */
 
