@@ -1,5 +1,5 @@
 const url = process.env.MONGODB_URI;
-console.log("MONGODB_URI: ", MONGODB_URL);
+console.log("MONGODB_URI: ", process.env.MONGODB_URI);
 
 const options = {
    useNewUrlParser: true
