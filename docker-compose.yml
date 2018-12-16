@@ -2,19 +2,19 @@
 version: '3'
 services:
 # For dev, it's working!
-  front:
-    image: node:8.9.4
-    container_name: "videosite-front"
-    depends_on: 
-      - backend
-    ports:
-      - 8080:8080
-    command: bash -c "npm install && npm run dev"
-    working_dir: /src
-    volumes:
-      - "./front:/src"
-    environment:
-      HOST: 0.0.0.0
+#  front:
+#    image: node:8.9.4
+#    container_name: "videosite-front"
+#    depends_on: 
+#      - backend
+#    ports:
+#      - 8080:8080
+#    command: bash -c "npm install && npm run dev"
+#    working_dir: /src
+#    volumes:
+#      - "./front:/src"
+#    #environment:
+#      #HOST: 0.0.0.0
 
   backend:
     image: node:8.9.4
@@ -29,7 +29,8 @@ services:
     volumes:
       - "./backend:/src"
     environment:
-      HOST: 0.0.0.0
+      # - HOST=0.0.0.0
+      - MONGODB_URI=mongodb://mongo/
       #- SET_CONTAINER_TIMEZONE=true
       #- CONTAINER_TIMEZONE=Europe/Helsinki
 
