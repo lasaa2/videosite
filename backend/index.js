@@ -49,6 +49,27 @@ const formatVideo = (video) => { // funktio joka "siivoaa" tietokantaan tallenne
   }
 }
 
+/* DEMODATA */
+
+let videos = [
+  {
+    "id": "0",
+    "name": "Live-sample",
+    "url": "http://wowza.oubs.fi/vod/mp4:sample.mp4/playlist.m3u8"
+  },
+  {
+    "id": "1",
+    "name": "Live",
+    "url": "http://wowza.oubs.fi/live/oubs/playlist.m3u8"
+  },
+  {
+    "id": "2",
+    "name": "Sample 1",
+    "url": "http://vjs.zencdn.net/v/oceans.mp4"
+  }
+]
+
+
 /* GETTERIT */
 
 app.get('/api/messages', (request, response) => {
@@ -76,6 +97,7 @@ app.get('/api/messages/:id', (request, response) => {
     })
 })
 
+/*
 app.get('/api/videos', (request, response) => {
   Video
     .find({})
@@ -83,7 +105,7 @@ app.get('/api/videos', (request, response) => {
       response.json(videos.map(formatVideo))
     })
 })
-
+*/
 /* Videorajapinta */
 
   // Return all videos
@@ -91,6 +113,7 @@ app.get('/api/videos', (request, response) => {
     response.json(videos)
   })
 
+/*
   // Return video filtered by ID
   app.get('/videos/:id', (request, response) => {
     const id = Number(request.params.id)
@@ -101,7 +124,7 @@ app.get('/api/videos', (request, response) => {
         response.status(404).end()
     }
   })
-
+*/
 /* POSTERIT / SETTERIT */
 
 app.post('/api/messages', (request, response) => {
