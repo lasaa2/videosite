@@ -1,7 +1,7 @@
 
 
 <template>
-    <div class="chat-body">
+    <div>
         <div class="messages" id="messageBody">
                 <div v-for="(msg, index) in messages" :key="index">      
                     <div class="popup-messages">

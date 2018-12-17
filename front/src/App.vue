@@ -1,29 +1,30 @@
 <template>
-  <div class="app">
-    <Row>
-        <Title :mainTitle="mainTitle" :subTitle="subTitle" class="header"/>
-    </Row>
-    <Row class="main">
-        <Col span="16">
-          <Videoplayer class="" v-bind:newUrl="newUrl" :videos="videos"/>
-        </Col>
-        <Col span="8">
-          <Playlist class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
-        </Col>
-    </Row>
-    <Row class="main">
-      <Col span="16">
-          <Chat/>
-      </Col>
-      <Col span="8">
-      </Col>
-    </Row>
+  <div class="container">
+    <b-row>
+      <b-col>
+        <Header :mainTitle="mainTitle" :subTitle="subTitle"/>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col cols="8">
+        <Videoplayer v-bind:newUrl="newUrl" :videos="videos"/>
+      </b-col>
+      <b-col cols="4">
+        <Playlist v-on:clicked="setPlaylistUrl" :videos="videos"/>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col >
+        <Chat/>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 
-import Title from './components/Title'
+import Header from './components/Header'
+import Logo from './components/Logo'
 import Videoplayer from './components/Videoplayer'
 import Playlist from './components/Playlist'
 import Chat from './components/Chat'
@@ -36,7 +37,8 @@ export default {
   name: 'App',
   props: ['videojs'],
   components: {
-    Title,
+    Header,
+    Logo,
     Videoplayer,
     Playlist,
     Chat,

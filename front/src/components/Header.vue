@@ -1,14 +1,10 @@
 <template>
-  <div class="title">
-    <Row>
-      <Col span="4">
-      <img src="../assets/oubs.jpg" height="42" width="42">
-      </Col>
-      <Col span="20">
-        <h1>{{mainTitle}}</h1>
+  <div class="media">
+      <img class="mr-3" src="../assets/oubs-web.png" alt="Logo image">
+      <div class="media-body">
+        <h1 class="mt-0">{{mainTitle}}</h1>
         <h2>{{subTitle}} </h2>
-      </Col>
-    </Row>
+    </div>
   </div>
 </template>
 
