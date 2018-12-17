@@ -18,6 +18,11 @@
         <Chat/>
       </b-col>
     </b-row>
+    <b-row>
+      <b-col>
+        <Footer/>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
