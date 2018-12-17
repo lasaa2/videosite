@@ -1,5 +1,3 @@
-
-
 <template>
     <div>
         <div class="messages" id="messageBody">
@@ -12,16 +10,11 @@
                 </div>
         </div>
         
-
         <form class="chat-input-body" @submit.prevent="sendMessage">
-            
             <input placeholder="user" v-model="user">
-            
             <input placeholder="message" v-model="message"/>
-
             <button type="submit">Send</button>
         </form>
-        
     </div>
 </template>
 
@@ -156,6 +149,8 @@ export default {
             .chat-input-body {
                 margin-top:5px;
             }
+
+
 
             /* Tekee asian että input pysyy paikallaan */
             .messages {

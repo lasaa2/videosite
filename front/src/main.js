@@ -5,12 +5,6 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
-Vue.use(iView);
-
-//import './styles.css'
-
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
