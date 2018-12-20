@@ -6,10 +6,10 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col cols="8">
+      <b-col class="col-md-8 col-sm-12 col-12">
         <Videoplayer v-bind:newUrl="newUrl" :videos="videos"/>
       </b-col>
-      <b-col cols="4">
+      <b-col class="col-md-4 col-sm-12 col-12">
         <Playlist v-on:clicked="setPlaylistUrl" :videos="videos"/>
       </b-col>
     </b-row>
