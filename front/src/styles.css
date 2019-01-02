@@ -6,10 +6,8 @@ body {
   background-color: #353535 !important;
 }
 
-.app {
-  margin-left: 40px;
-  margin-right: 40px;
-  max-width: 970px;
+.container {
+    background-color: #969696;
 }
 
 
@@ -25,40 +23,6 @@ body {
 
 /* VIDEOPLAYER */
 
-.main {
-  max-width: 970px;
-  /*padding-left: 40px;
-  padding-right: 40px;*/
-}
-
-.playlist {
-  padding-left: 10px;
-  max-height: 360px;
-  color: white;
-}
-
-.playlist-buttons {
-  margin-top: 5px;
-  font-size: 18px;
-}
-
-@media only screen and (max-width: 600px) {
-  .app {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-  
-  .main {
-    width: 100%;
-    /*padding-left: 10px;
-    padding-right: 10px;*/
-  }
-  .playlist-buttons {
-    margin-top: 5px;
-    font-size: 10px;
-  }
-}
-
 .videocontent {
   width: 100%;
   max-width: 640px;
@@ -72,11 +36,9 @@ body {
 /* CHAT */
 
 .chat {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid;
-  }
+
+    
+}
 
 
 /* FOOTER */
@@ -87,100 +49,6 @@ body {
   margin-top:16px;
   color: white;
 }
-
-
-/*
-
-.laatikko1 {
-  border: 2px solid;
-  padding: 10px;
-  max-width: 640px;
-}
-.laatikko2 {
-  border: 2px solid;
-  padding: 10px;
-}
-
-
-
-  body {
-    background-color: #f1f1f1;
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-
-  .app {
-
-  }
-
-  .header {
-    padding: 1px 20px 10px 20px;
-    background-color: white;
-  }
-
-  .main {
-    display: grid;
-    grid-template-columns: 640px auto;
-    grid-gap: 10px;
-  }
-
-  .videoplayer {
-    height: 360px;
-    width: 640px;
-  }
-
-  .playlist {
-    
-    padding: 10px;
-    background-color: white;
-    max-width: 300px;
-  }
-
-  */
-
-  
-/*
-  .searchbox {
-    width: 98%;
-  }
-
-  .chat {
-    text-align: center;
-    margin: 20px;
-    border-top: 1px solid;
-  }
-
-  /*
-
-  .button {
-    width: 70%;
-    font-size: 15px;
-    margin: 10px;
-  }
-  
-  .sidebar {
-    grid-column-start: 15;
-    grid-column-end: 16;
-    display: grid;
-  }
-
-  
-
-  .footer {
-    text-align: center;
-  }
-  
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 20px;
-  }
-
-  */
-
 
   /* Videojs custom */
 

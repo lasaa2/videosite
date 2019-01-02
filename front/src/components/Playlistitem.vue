@@ -1,8 +1,8 @@
 <template>
     <div>
-      <Button type="primary" long class="playlist-buttons" v-on:click="onClickButton(item)" :src="item | url">
-        {{item | fullName}}
-      </Button>
+        <b-button variant="primary" v-on:click="onClickButton(item)" :src="item | url">
+          {{item | fullName}}
+        </b-button>
     </div>
 </template>
 

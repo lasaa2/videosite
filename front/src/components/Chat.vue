@@ -1,32 +1,24 @@
-
-
 <template>
-    <div class="chat-body">
+    <div>
         <div class="messages" id="messageBody">
                 <div v-for="(msg, index) in messages" :key="index">      
                     <div class="popup-messages">
-                        <p class="time-right">{{msg.date | formatDate}}
-                        <b>{{ msg.user }} says:</b> {{ msg.content}}
-                        </p>
+                        <span>{{msg.date | formatDate}}
+                        <b>{{ msg.user }}:</b> {{ msg.content}}
+                        </span>
                     </div>
                 </div>
         </div>
-        
         <form class="chat-input-body" @submit.prevent="sendMessage">
-            
             <input placeholder="user" v-model="user">
-            
-            <input placeholder="message" v-model="message"/>
-
+            <input placeholder="message" v-model="newMessage"/>
             <button type="submit">Send</button>
         </form>
-        
     </div>
 </template>
 
 <script>
 
-import Message from './Message'
 import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -37,19 +29,16 @@ import moment from 'moment'
 
 export default {
     name: 'Chat',
-    components: {
-        Message
-    },
+
 
     props: ['backendUrl'],
 
     data() {
         return {
-            newMessage: "",
             user: '',
-            message: '',
+            newMessage: '',
             messages: [],
-            socket : io(this.backendUrl),
+            socket : io(process.env.API_URL),
             time: String,
             errors: [],
             //backendUrl: this.backendUrl
@@ -61,19 +50,19 @@ export default {
     },
 
     created() {
-        axios.get('http://' + this.backendUrl + '/api/messages') // reveice message database
+        axios.get('http://' + process.env.API_URL + '/api/messages') // receive message database first time
             .then((response) => {
-            this.messages = response.data;
+                this.messages = response.data;
             })
             .catch(function (error) {
-            // handle error
-            console.log(error);
+                console.log(error); // handle errors
             })
 
         this.socket.on('message', function (data) { // listen new messages from database via backend, and push them ”messages"
-            // console.log('Lähetetty viesti: ', data)
             this.messages.push(data)
         }.bind(this))
+
+
     },
 
     updated() {
@@ -82,6 +71,15 @@ export default {
 
     filters: {
         formatDate: (value) => {
+            const d = new Date()
+            const n = moment(String(d.toISOString())).format('DDMMYY')
+            const p = moment(String(value)).format('DDMMYY')
+            
+            // also print date if it has changed
+            if (p != n) {
+                return moment(String(value)).format('DD.MM.YYYY, HH:mm:ss')
+            }
+
             return moment(String(value)).format('HH:mm:ss')
         },
     },
@@ -91,16 +89,16 @@ export default {
         sendMessage(e) {
             e.preventDefault();
 
-            if (this.message == "") {
+            if (this.newMessage == "") {
                 console.log("content missing");
             } else {
                 this.socket.emit('new message', {
                 user: this.user,
-                message: this.message,
+                message: this.newMessage,
                 });
             }
             
-            this.message = ""
+            this.newMessage = ""
         },
 
         scrollBottom: () => {
@@ -113,40 +111,10 @@ export default {
 </script>
 
 <style>
-
-@media only screen and (max-width : 540px) 
-            {
-                .chat-sidebar
-                {
-                    display: none !important;
-                }
-                
-                .chat-popup
-                {
-                    display: none !important;
-                }
-            }
-
-
-            .chat-body {
-                background-color: black;
-                color:wheat;
-                margin-top: 8px;
-                padding: 10px;
-                font-size: 13px;
-                font-family: 'Courier New', Courier, monospace;
-            }
-
-            .chat-input-body {
-                margin-top:5px;
-            }
-
-            /* Tekee asian että input pysyy paikallaan */
-            .messages {
-                    height: 260px;
-                overflow-x: scroll;
-                overflow-x: hidden;
-            }
-   
-
+/* Tekee asian että input pysyy paikallaan */
+.messages {
+    height: 260px;
+    overflow-x: scroll;
+    overflow-x: hidden;
+}
 </style>

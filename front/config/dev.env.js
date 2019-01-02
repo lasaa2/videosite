@@ -4,5 +4,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  ROOT_API: '"localhost:3002"'
+  API_URL: '"localhost:3002"'
 })

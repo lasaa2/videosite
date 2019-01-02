@@ -1,42 +1,16 @@
 /* TODO
 
 - schemat erillisiin moduuleihin ja tuodaan ne oliona requirella
-- mongoose yhteyspalikka esim tähän tiedostoon 
 
 */
 
-if ( process.env.NODE_ENV !== 'production' ) {
-  require('dotenv').config()
-}
-
-const url = process.env.MONGODB_URI; // host is "mongo", because docker-compose conf is "mongo". Port is also not needed.
-//const url = "mongodb://mongo/"
-
-const options = { //mongodb options
-  promiseLibrary: require('bluebird'),
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  autoIndex: false, // Don't build indexes
-  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-  reconnectInterval: 500, // Reconnect every 500ms
-  poolSize: 10, // Maintain up to 10 socket connections
-  // If not connected, return errors immediately rather than waiting for reconnect
-  bufferMaxEntries: 0,
-  connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
-  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-  family: 4 // Use IPv4, skip trying IPv6
-};
-
+const mongoose = require('./models/db') // mongodb connection
 const Message = require('./models/message') // Tuodaan mongodb schemat, joilla määritellään miten tietoa tallennetaan tietokantaan
 // const Conversation = require('./models/conversation')
 // const Video = require('./models/video') // DB conf
 
 const express = require('express') // yleinen node web ohjelma
 const app = express() // luodaan uusi web palvelin expressin avulla
-
-const mongoose = require('mongoose')
-mongoose.connect(url, options); // muodostetaan yhteys tietokantaan
 
 const bodyParser = require('body-parser') // tarvitaan viestien tallennukseen, post palautusten käsittelyyn
 const cors = require('cors') // tarvitaan jotta front ja backend voi olla eri portissa
@@ -129,8 +103,8 @@ app.get('/api/messages/:id', (request, response) => {
     })
 })
 
-
 /* Video getteri, haku tietokannasta */
+
 /*
 app.get('/api/videos', (request, response) => {
   Video
@@ -141,7 +115,7 @@ app.get('/api/videos', (request, response) => {
 })
 
 */
-
+  
 /* Videorajapinta */
 
   // Return all videos

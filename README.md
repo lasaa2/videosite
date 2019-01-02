@@ -3,7 +3,24 @@
 Hello
 
 
-Env
 
-API_URL: localhost:3002
-MONGODB_URI: mongodb://localhost:8001
+## Development
+
+Run start_dev.sh
+
+(docker-compose for backend and db, npm run dev for front)
+
+## Deploy to production
+
+
+
+## Branching
+
+master
+- production branch
+
+dev
+- development and testing branch
+
+New feature?
+- make new branch: git checkout -b feature_x

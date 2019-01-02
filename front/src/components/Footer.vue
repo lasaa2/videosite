@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <h3>{{footerText}}</h3>
+        <h3 class="text-center">{{footerText}} Footer Text</h3>
     </div>
 </template>
 

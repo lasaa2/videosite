@@ -1,29 +1,37 @@
 <template>
-  <div class="app">
-    <Row>
-        <Title :mainTitle="mainTitle" :subTitle="subTitle" class="header"/>
-    </Row>
-    <Row class="main">
-        <Col span="16">
-          <Videoplayer class="" v-bind:newUrl="newUrl" :videos="videos"/>
-        </Col>
-        <Col span="8">
-          <Playlist class="playlist" v-on:clicked="setPlaylistUrl" :videos="videos"/>
-        </Col>
-    </Row>
-    <Row class="main">
-      <Col span="16">
-          <Chat :backendUrl="backendUrl"/>
-      </Col>
-      <Col span="8">
-      </Col>
-    </Row>
+  <div class="container">
+    <b-row>
+      <b-col>
+        <Header :mainTitle="mainTitle" :subTitle="subTitle"/>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="col-md-8 col-12">
+        <Videoplayer v-bind:newUrl="newUrl" :videos="videos"/>
+      </b-col>
+      <b-col class="col-md-4 col-12">
+        <Playlist v-on:clicked="setPlaylistUrl" :videos="videos"/>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="d-none d-md-block">
+        <Chat/>
+      </b-col>
+      <b-col class="d-md-none">
+        <p> Notice: The chat works only larger screens. </p>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <Footer/>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 
-import Title from './components/Title'
+import Header from './components/Header'
 import Videoplayer from './components/Videoplayer'
 import Playlist from './components/Playlist'
 import Chat from './components/Chat'
@@ -36,7 +44,7 @@ export default {
   name: 'App',
   props: ['videojs'],
   components: {
-    Title,
+    Header,
     Videoplayer,
     Playlist,
     Chat,
@@ -53,14 +61,11 @@ export default {
       backendUrl: process.env.ROOT_API
     }
   },
-  
+
+  // Video API
   mounted() {
+    fetch("http://" + process.env.API_URL + "/api/videos")
 
-    //console.log(this.backendUrl)
-
-    /* Videohaku */
-
-    fetch('http://' + this.backendUrl + '/api/videos')
     .then(response => response.json())
     .then((data) => {
       this.videos = data;

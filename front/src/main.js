@@ -5,12 +5,6 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
-Vue.use(iView);
-
-//import './styles.css'
-
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue);
 
@@ -18,7 +12,6 @@ import VueChatScroll from 'vue-chat-scroll'
 Vue.use(VueChatScroll);
 
 Vue.use(require('vue-moment')); // ajan näyttämiseen
-
 
 /* eslint-disable no-new */
 new Vue({
