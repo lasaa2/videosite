@@ -58,12 +58,14 @@ export default {
       footerText: "© OUBS",
       videos: [],
       newUrl: '',
+      backendUrl: process.env.ROOT_API
     }
   },
 
   // Video API
   mounted() {
     fetch("http://" + process.env.API_URL + "/api/videos")
+
     .then(response => response.json())
     .then((data) => {
       this.videos = data;

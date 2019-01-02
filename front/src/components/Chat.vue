@@ -31,6 +31,8 @@ export default {
     name: 'Chat',
 
 
+    props: ['backendUrl'],
+
     data() {
         return {
             user: '',
@@ -38,8 +40,13 @@ export default {
             messages: [],
             socket : io(process.env.API_URL),
             time: String,
-            errors: []
+            errors: [],
+            //backendUrl: this.backendUrl
         }
+    },
+
+    mounted() {
+        //console.log(this.backendUrl)
     },
 
     created() {
@@ -98,7 +105,6 @@ export default {
             const msgBody = document.querySelector('#messageBody');
             msgBody.scrollTop = msgBody.scrollHeight - msgBody.clientHeight - 1
         }
-
     }  
 }
 
