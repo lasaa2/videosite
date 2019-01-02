@@ -6,16 +6,19 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="col-md-8 col-sm-12 col-12">
+      <b-col class="col-md-8 col-12">
         <Videoplayer v-bind:newUrl="newUrl" :videos="videos"/>
       </b-col>
-      <b-col class="col-md-4 col-sm-12 col-12">
+      <b-col class="col-md-4 col-12">
         <Playlist v-on:clicked="setPlaylistUrl" :videos="videos"/>
       </b-col>
     </b-row>
     <b-row>
-      <b-col >
+      <b-col class="d-none d-md-block">
         <Chat/>
+      </b-col>
+      <b-col class="d-md-none">
+        <p> Notice: The chat works only larger screens. </p>
       </b-col>
     </b-row>
     <b-row>

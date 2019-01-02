@@ -2,8 +2,7 @@
   <div class="media">
       <img class="mr-3" src="../assets/oubs-web.png" alt="Logo image">
       <div class="media-body">
-        <h1 class="mt-0">{{mainTitle}}</h1>
-        <h2>{{subTitle}} </h2>
+        <h3 class="mt-0">{{mainTitle}}</h3>
     </div>
   </div>
 </template>
