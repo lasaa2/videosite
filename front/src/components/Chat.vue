@@ -36,14 +36,14 @@ export default {
             user: '',
             newMessage: '',
             messages: [],
-            socket : io('localhost:3002'),
+            socket : io(process.env.API_URL),
             time: String,
             errors: []
         }
     },
 
     created() {
-        axios.get('http://localhost:3002/api/messages') // receive message database first time
+        axios.get('http://' + process.env.API_URL + '/api/messages') // receive message database first time
             .then((response) => {
                 this.messages = response.data;
             })
@@ -54,6 +54,7 @@ export default {
         this.socket.on('message', function (data) { // listen new messages from database via backend, and push them ”messages"
             this.messages.push(data)
         }.bind(this))
+
 
     },
 

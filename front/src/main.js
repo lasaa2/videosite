@@ -13,7 +13,6 @@ Vue.use(VueChatScroll);
 
 Vue.use(require('vue-moment')); // ajan näyttämiseen
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

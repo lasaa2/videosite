@@ -60,10 +60,10 @@ export default {
       newUrl: '',
     }
   },
-  
-  // Väliaikaisesti poissa, korjaa api
+
+  // Video API
   mounted() {
-    fetch("http://localhost:3002/api/videos")
+    fetch("http://" + process.env.API_URL + "/api/videos")
     .then(response => response.json())
     .then((data) => {
       this.videos = data;
