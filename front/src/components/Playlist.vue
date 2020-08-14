@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="playlist">
         <h2>Playlist</h2>
         <Search v-model="search"/>
         <Playlistitem v-on:clicked="onClickChild" v-for="item in filteredList" :item="item" :key="item.id"/>
@@ -29,7 +29,6 @@ export default {
     onClickChild: function (value) {
       this.$emit('clicked', value);
     },
-
   },
 
   computed: {

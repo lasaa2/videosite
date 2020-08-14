@@ -5,10 +5,10 @@ import App from './App'
 
 Vue.config.productionTip = false
 
-import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 
-import VueChatScroll from 'vue-chat-scroll'
+import VueChatScroll from 'vue-chat-scroll';
 Vue.use(VueChatScroll);
 
 Vue.use(require('vue-moment')); // ajan näyttämiseen

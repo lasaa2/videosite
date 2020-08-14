@@ -1,10 +1,8 @@
 <template>
-  <div class="media">
-      <img class="mr-3" src="../assets/oubs-web.png" alt="Logo image">
-      <div class="media-body">
-        <h3 class="mt-0">{{mainTitle}}</h3>
-    </div>
-  </div>
+  <div>
+      <img src="../assets/oubs-web.png" alt="Logo image">
+      <h3 class="col-md-4">{{mainTitle}}</h3>
+ </div>
 </template>
 
 <script>

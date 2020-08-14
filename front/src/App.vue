@@ -1,10 +1,11 @@
 <template>
-  <div class="container">
+  <b-container fluid>
+    <!-- HEADER -->
     <b-row>
-      <b-col>
-        <Header :mainTitle="mainTitle" :subTitle="subTitle"/>
-      </b-col>
+      <Header :mainTitle="mainTitle" :subTitle="subTitle"/>
     </b-row>
+    <!-- HEADER END -->
+    <!-- CONTENT -->
     <b-row>
       <b-col class="col-md-8 col-12">
         <Videoplayer v-bind:newUrl="newUrl" :videos="videos"/>
@@ -21,12 +22,13 @@
         <p> Notice: The chat works only larger screens. </p>
       </b-col>
     </b-row>
-    <b-row>
-      <b-col>
-        <Footer/>
-      </b-col>
-    </b-row>
-  </div>
+    <!-- CONTENT END -->
+    <!-- FOOTER -->
+    <footer class="footer">
+      <Footer/>
+    </footer>
+    <!-- FOOTER END -->
+  </b-container>
 </template>
 
 <script>
